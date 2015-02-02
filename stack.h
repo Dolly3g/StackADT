@@ -2,11 +2,9 @@
 typedef struct stack Stack;
 
 struct stack{
-	Node* top;
-	int count;	
+	LinkedList* list;
 };
 
 Stack createStack(void);
-int push(Stack*,void*);
-void* pop(Stack*);
-int new_push(Stack,void*);
+int push(Stack,void*);
+void* pop(Stack);

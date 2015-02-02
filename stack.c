@@ -1,25 +1,17 @@
+#include <stdlib.h>
 #include "stack.h"
 
 Stack createStack(void){
-	Stack s={0,0};
+	Stack s;
+	s.list = calloc(1,sizeof(LinkedList));
 	return s;
 }
 
-int push(Stack* s,void* data){
+int push(Stack s,void* data){
 	Node* n = create_node(data);
-	if(s->count != 0){
-		n->next = s->top;
-	}
-	s->top = n;
-	return ++s->count;
+	add_to_list(s.list,n);
+	return s.list->count;
 }
-
-void* pop(Stack* s){
-	void* deleted_data;
-	if(s->top == 0){
-		return 0;
-	}
-	deleted_data= s->top->data;
-	s->top = s->top->next;
-	return deleted_data;
+void* pop(Stack s){
+	return deleteElementAt(s.list,s.list->count-1);
 }
